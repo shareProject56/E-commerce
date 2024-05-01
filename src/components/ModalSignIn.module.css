@@ -1,0 +1,52 @@
+.divModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 2px grey;
+  border-radius: 0.8rem;
+  height: 20rem;
+  width: 50rem;
+  z-index: 10;
+  background-color: rgb(245 245 245);
+  transition: all 0.3s;
+}
+
+.divModal:hover {
+  border: solid 2px black;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.13);
+  backdrop-filter: blur(2.5px);
+  z-index: 5;
+}
+
+.modalCloseBtn {
+  user-select: none;
+  cursor: pointer;
+  color: grey;
+  border: solid 2.5px grey;
+  border-radius: 25%;
+  margin: 0;
+  padding: 0 0.5rem 0 0.5rem;
+  position: absolute;
+  top: 3%;
+  right: 1.5%;
+  transition: all 0.3s;
+}
+
+.modalCloseBtn:hover {
+  background-color: rgb(67, 142, 255);
+  color: black;
+  border: solid 2.5px black;
+}

@@ -1,0 +1,1 @@
+** If API is missing some data which sends fix products then we can create a array of object with the options we want and first we will loop API with map() and then our array with filer() inside the map() comparing the two IDs and then combine both of them.
