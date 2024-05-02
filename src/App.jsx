@@ -9,6 +9,7 @@ import CartPage from "./pages/CartPage";
 import PageNotFound from "./pages/pageNotFound";
 import options from "../public/Data/optionsProduct";
 import GuestOrderPlaced from "./pages/GuestOrderPlaced";
+import TxnFailed from "./components/TxnFailed";
 
 function App() {
   const [cartNav, setCartNav] = useState(0);
@@ -79,6 +80,7 @@ function App() {
           path="unknOrder"
           element={<GuestOrderPlaced guestUserData={guestUserData} />}
         />
+        <Route path="/txnFailed" element={<TxnFailed cartNav={cartNav} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

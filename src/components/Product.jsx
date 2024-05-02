@@ -3,7 +3,7 @@ import styles from "./Product.module.css";
 import { useState } from "react";
 
 function Product({ product, setCartNav, setCart }) {
-  console.log(product);
+  // console.log(product);
   const [sortString, setSortString] = useState("normal");
   const [categoriesString, setCategoriesString] = useState("normal");
 

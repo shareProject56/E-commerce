@@ -3,6 +3,7 @@ import ModalSignIn from "../components/ModalSignIn";
 import Navbar from "../components/Navbar";
 import styles from "./CartPage.module.css";
 import { Link } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 function CartPage({
   cartNav,
@@ -17,6 +18,7 @@ function CartPage({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnterDetailsOpen, setIsEnterDetailsOpen] = useState(false);
   const [isConfirmDetailsOpen, setIsConfirmDetailsOpen] = useState(false);
+  const [isOnlineMethod, setIsOnlineMethod] = useState(true);
 
   const boxRef = useRef(null);
 
@@ -29,7 +31,7 @@ function CartPage({
     cart.reduce((acc, el) => el.price * el.options[0].quantity + acc, 0)
   );
 
-  // console.log(cart);
+  console.log(cart);
   function handleDeleteItem(val) {
     setCart((cur) => cur.filter((el) => el.id !== val));
     setCartNav((cur) => cur - 1);
@@ -101,6 +103,7 @@ function CartPage({
       setGuestUserData((cur) => {
         return { ...cur, paymentMode: val };
       });
+      setIsOnlineMethod(false);
       // console.log(guestUserData);
     }
     if (val === "_netBanking") {
@@ -108,12 +111,43 @@ function CartPage({
       setGuestUserData((cur) => {
         return { ...cur, paymentMode: val };
       });
+      setIsOnlineMethod(true);
       // console.log(guestUserData);
     }
   }
 
-  function handlePlaceOrder(val) {
-    console.log(val);
+  async function makepayment() {
+    const stripe = await loadStripe(
+      "pk_test_51PBgMwSAFf6ULjsIJ4eDlZpACZhT4y1m8QLh2ZCVmQYQJ7UzJyprtrQ0Afys4d6TkJoEZE45XUlTmXOfsRrtSoXX00be8N2u3F"
+    );
+
+    const body = {
+      products: cart,
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    // Card Number Sample: 4000003560000008 VISA
+    const response = await fetch(
+      "http://localhost:7000/api/create-checkout-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
   }
 
   return (
@@ -230,6 +264,7 @@ function CartPage({
                 id="netBanking"
                 name="payment"
                 value="_netBanking"
+                checked={isOnlineMethod}
                 onChange={(e) => handlePaymentOption(e.target.value)}
               />
               <label htmlFor="netBanking">
@@ -237,14 +272,15 @@ function CartPage({
               </label>
             </form>
           </div>
-          <Link to="/unknOrder" className={styles.linkPlaceOrder}>
-            <h2
-              className={styles.placeOrderBtn}
-              onClick={() => handlePlaceOrder(guestUserData.paymentMode)}
-            >
-              Place Order
+          {isOnlineMethod ? (
+            <h2 className={styles.placeOrderBtn} onClick={() => makepayment()}>
+              Place Order Online
             </h2>
-          </Link>
+          ) : (
+            <Link to="/unknOrder" className={styles.linkPlaceOrder}>
+              <h2 className={styles.placeOrderBtn}>Place COD Order</h2>
+            </Link>
+          )}
         </div>
       )}
     </div>
