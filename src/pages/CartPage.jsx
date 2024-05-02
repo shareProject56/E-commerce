@@ -116,38 +116,54 @@ function CartPage({
     }
   }
 
-  async function makepayment() {
-    const stripe = await loadStripe(
-      "pk_test_51PBgMwSAFf6ULjsIJ4eDlZpACZhT4y1m8QLh2ZCVmQYQJ7UzJyprtrQ0Afys4d6TkJoEZE45XUlTmXOfsRrtSoXX00be8N2u3F"
-    );
+  function handlePayment() {
+    async function makepayment() {
+      try {
+        const stripe = await loadStripe(
+          "pk_test_51PBgMwSAFf6ULjsIJ4eDlZpACZhT4y1m8QLh2ZCVmQYQJ7UzJyprtrQ0Afys4d6TkJoEZE45XUlTmXOfsRrtSoXX00be8N2u3F"
+        );
 
-    const body = {
-      products: cart,
-    };
+        const body = {
+          products: cart,
+        };
 
-    const headers = {
-      "Content-Type": "application/json",
-    };
+        const headers = {
+          "Content-Type": "application/json",
+        };
 
-    // Card Number Sample: 4000003560000008 VISA
-    const response = await fetch(
-      "http://localhost:7000/api/create-checkout-session",
-      {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body),
+        // Card Number Sample: 4000003560000008 VISA
+        const response = await fetch(
+          "http://localhost:7000/api/create-checkout-session",
+          {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to create checkout session");
+        }
+
+        const session = await response.json();
+
+        const result = stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+
+        if (result.error) {
+          console.log(result.error);
+          alert(
+            "Currently we are facing issues with Online payment You can order with COD!!!"
+          );
+        }
+      } catch (err) {
+        alert(
+          "Currently we are facing issues with Online payment You can order with COD!!!"
+        );
       }
-    );
-
-    const session = await response.json();
-
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
-
-    if (result.error) {
-      console.log(result.error);
     }
+    makepayment();
   }
 
   return (
@@ -273,12 +289,15 @@ function CartPage({
             </form>
           </div>
           {isOnlineMethod ? (
-            <h2 className={styles.placeOrderBtn} onClick={() => makepayment()}>
+            <button
+              className={styles.placeOrderBtn}
+              onClick={() => handlePayment()}
+            >
               Place Order Online
-            </h2>
+            </button>
           ) : (
             <Link to="/unknOrder" className={styles.linkPlaceOrder}>
-              <h2 className={styles.placeOrderBtn}>Place COD Order</h2>
+              <button className={styles.placeOrderBtn}>Place COD Order</button>
             </Link>
           )}
         </div>
