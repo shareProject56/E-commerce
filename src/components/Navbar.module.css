@@ -33,3 +33,24 @@
 .liCart {
   height: 1rem;
 }
+
+@media (max-width: 768px) {
+  .navDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+
+    height: 5rem;
+    background-color: rgb(147, 152, 172);
+  }
+
+  .navSpanLogo {
+    margin: 0 0 0 1rem;
+  }
+
+  .navUl li {
+    margin: 0 1.7rem 0 1.7rem;
+    transition: all 0.2s;
+  }
+}

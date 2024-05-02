@@ -88,16 +88,38 @@
 
 .placeOrderBtn {
   text-align: center;
-  margin: 0 1rem 0 1rem;
+  margin: 0 10rem 0 10rem;
   color: rgb(37, 37, 37);
   padding: 0.7rem 4rem;
   border-radius: 20px;
   background-color: rgb(0, 102, 255);
-  color: bisque;
+  color: rgb(49, 49, 49);
   transition: all 0.2s;
 }
 
 .placeOrderBtn:hover {
   background-color: rgb(67, 142, 255);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .divCartPage {
+    position: relative;
+    height: 100vh;
+    width: 44rem;
+  }
+
+  .divProduct {
+    padding: 1.5rem;
+    margin: 5rem 3rem;
+    border: solid 3px;
+    border-radius: 20px;
+  }
+
+  .divCartBuy {
+    padding: 0 3rem 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

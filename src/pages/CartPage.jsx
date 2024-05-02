@@ -289,15 +289,15 @@ function CartPage({
             </form>
           </div>
           {isOnlineMethod ? (
-            <button
+            <h3
               className={styles.placeOrderBtn}
               onClick={() => handlePayment()}
             >
               Place Order Online
-            </button>
+            </h3>
           ) : (
             <Link to="/unknOrder" className={styles.linkPlaceOrder}>
-              <button className={styles.placeOrderBtn}>Place COD Order</button>
+              <h3 className={styles.placeOrderBtn}>Place COD Order</h3>
             </Link>
           )}
         </div>

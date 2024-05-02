@@ -107,3 +107,24 @@
   margin: 0 0 0 2rem;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .divProduct {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    /* First column is 100px, rest adjust */
+    /* grid-template-columns: repeat(4, auto); */
+    gap: 0px;
+    /* grid-auto-rows: 40rem; Set the height of each grid item to 10rem */
+  }
+
+  .divInsideProduct {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0.5rem 0.5rem 0 0.5rem;
+    padding: 0.5rem;
+    border: solid 3px;
+    border-radius: 10px;
+  }
+}
