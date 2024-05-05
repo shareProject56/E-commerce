@@ -133,7 +133,8 @@ function CartPage({
 
         // Card Number Sample: 4000003560000008 VISA
         const response = await fetch(
-          "http://localhost:7000/api/create-checkout-session",
+          // "http://localhost:7000/api/create-checkout-session",
+          "https://server.myprojects.store/api/create-checkout-session",
           {
             method: "POST",
             headers: headers,
@@ -250,7 +251,7 @@ function CartPage({
                 />
               </li>
             </ol>
-            <button>Add Details</button>
+            <button className={styles.placeOrderBtn}>Add Details</button>
           </form>
         </div>
       )}

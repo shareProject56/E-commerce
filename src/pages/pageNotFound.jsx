@@ -5,7 +5,7 @@ function PageNotFound() {
   return (
     <>
       <Navbar />
-      <h1>Page NOT Found</h1>
+      <h1>Page NOT Found(Click on Product page to Start shopping)</h1>
     </>
   );
 }

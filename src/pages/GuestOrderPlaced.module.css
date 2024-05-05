@@ -5,3 +5,10 @@
   border-radius: 20px;
   height: 20rem;
 }
+
+@media (max-width: 768px) {
+  .divProduct {
+    margin: 8rem 8rem;
+    height: 5rem;
+  }
+}

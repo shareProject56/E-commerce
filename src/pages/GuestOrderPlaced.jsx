@@ -13,12 +13,13 @@ function GuestOrderPlaced({ guestUserData }) {
     <>
       <Navbar />
       <div className={styles.divProduct}>
-        <h2>
+        <p>
           Thank you {name} for Ordering from us!!! Your order with Order ID:
-          AKI-O{orderID} has been placed succesfully with{" "}
-          {paymentMode === "_cod" ? "COD" : "Online method"}. Your order will be
-          delivered to you before: {fiveDaysAheadTimeStamp.toDateString()}.
-        </h2>
+          <strong>AKI-O{orderID}</strong> has been placed succesfully with{" "}
+          <strong> {paymentMode === "_cod" ? "COD" : "Online method"}</strong>.
+          Your order will be delivered to you before:
+          <strong> {fiveDaysAheadTimeStamp.toDateString()}</strong>.
+        </p>
       </div>
     </>
   );

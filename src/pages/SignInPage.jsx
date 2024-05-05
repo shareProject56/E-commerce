@@ -4,7 +4,7 @@ function SignInPage() {
   return (
     <>
       <Navbar />
-      <h1>Sign In Here</h1>
+      <h1>Sign In Here(Click on Product page to Start shopping)</h1>
     </>
   );
 }

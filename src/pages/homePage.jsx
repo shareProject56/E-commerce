@@ -4,7 +4,7 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <h1>Homepage</h1>
+      <h1>Homepage(Click on Product page to Start shopping)</h1>
     </>
   );
 }
